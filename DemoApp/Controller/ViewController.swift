@@ -9,6 +9,16 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var labelText: UILabel!
+    @IBOutlet weak var inputField: UITextField!
+    
+    @IBAction func handleClick(_ sender: UIButton) {
+        print(inputField.text)
+        labelText.text = inputField.text
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

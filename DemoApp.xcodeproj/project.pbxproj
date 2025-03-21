@@ -30,7 +30,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		CA980B8A2D8CCB6900839C6F /* Exceptions for "DemoApp" folder in "DemoApp" target */ = {
+		CA980BBD2D8CCDAC00839C6F /* Exceptions for "DemoApp" folder in "DemoApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -40,14 +40,6 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		CA980B642D8CCB6700839C6F /* DemoApp */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				CA980B8A2D8CCB6900839C6F /* Exceptions for "DemoApp" folder in "DemoApp" target */,
-			);
-			path = DemoApp;
-			sourceTree = "<group>";
-		};
 		CA980B7B2D8CCB6900839C6F /* DemoAppTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = DemoAppTests;
@@ -56,6 +48,14 @@
 		CA980B852D8CCB6900839C6F /* DemoAppUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = DemoAppUITests;
+			sourceTree = "<group>";
+		};
+		CA980BB62D8CCDAC00839C6F /* DemoApp */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				CA980BBD2D8CCDAC00839C6F /* Exceptions for "DemoApp" folder in "DemoApp" target */,
+			);
+			path = DemoApp;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -88,7 +88,7 @@
 		CA980B592D8CCB6700839C6F = {
 			isa = PBXGroup;
 			children = (
-				CA980B642D8CCB6700839C6F /* DemoApp */,
+				CA980BB62D8CCDAC00839C6F /* DemoApp */,
 				CA980B7B2D8CCB6900839C6F /* DemoAppTests */,
 				CA980B852D8CCB6900839C6F /* DemoAppUITests */,
 				CA980B632D8CCB6700839C6F /* Products */,
@@ -121,7 +121,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				CA980B642D8CCB6700839C6F /* DemoApp */,
+				CA980BB62D8CCDAC00839C6F /* DemoApp */,
 			);
 			name = DemoApp;
 			packageProductDependencies = (
