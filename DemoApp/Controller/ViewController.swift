@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var inputField: UITextField!
     
     @IBAction func handleClick(_ sender: UIButton) {
-        print(inputField.text)
+        print(inputField.text ?? "empty")
         labelText.text = inputField.text
         
     }
@@ -22,8 +22,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        trackScreen()
     }
 
+    func trackScreen(){
+        
+        evergageScreen?.trackAction("Main Screen")
+    }
 
 }
 

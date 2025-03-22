@@ -6,13 +6,32 @@
 //
 
 import UIKit
+import Evergage
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        let evergage = Evergage.sharedInstance()
+        
+        //Set User ID as anonymous
+        evergage.userId = evergage.anonymousId
+        
+        //Start the Evergage Configuration with our Dataset information
+        evergage.start { (clientConfigurationBuilder)   in
+            clientConfigurationBuilder.account = "sundoginteractive"
+            clientConfigurationBuilder.dataset = "prft_demo2022"
+            // if we want to user push notification campaings
+            clientConfigurationBuilder.usePushNotifications = true
+            //Allow user-initiated gesture to connect to the Personalization web console for action mapping screens.
+            clientConfigurationBuilder.useDesignMode = true
+        }
+        
+        
+        
         // Override point for customization after application launch.
         return true
     }
