@@ -16,7 +16,7 @@ struct NasaManager {
     let nasaURL = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos"
     let apiKey = "3BKXf7KfxfaCz6B61XmuTyJ3jYZcfBiO9memTqOU"
     
-    let delegate: NasaManagerDelegate?
+    var delegate: NasaManagerDelegate?
     //Create the URL and pass a date value
     func fetchPhotos (date: String?){
         if let dateValue = date {
