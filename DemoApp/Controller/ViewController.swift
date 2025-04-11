@@ -13,14 +13,14 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var earthDatePicker: UIDatePicker!
     
-    var finalDate :String? = nil
+    var finalDate :String?
     var nasaManager = NasaManager()
     
     @IBAction func handleClick(_ sender: UIButton) {
         print(finalDate!)
         nasaManager.fetchPhotos(date: finalDate!)
         evergageScreen?.trackAction("Button clicked")
-        
+        self.performSegue(withIdentifier: "goToPhotos", sender: self)
     }
     
     
@@ -63,6 +63,19 @@ extension ViewController: NasaManagerDelegate{
         print(error)
     }
     
-    
+}
+
+extension ViewController {
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        if segue.identifier == "goToPhotos"{
+            let destination = segue.destination as! PhotosViewController
+            destination.value = "Hola Perra"
+        }
+    }
 }
 
