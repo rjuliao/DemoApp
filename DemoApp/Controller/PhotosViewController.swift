@@ -9,8 +9,12 @@ import UIKit
 
 class PhotosViewController: UIViewController {
 
-    var value: String?
-    
+    var img_src: String?
+    var fullNameStr: String?
+    var earthDateStr: String?
+    var roverNameStr: String?
+    var landingDateStr: String?
+    var launchDateStr: String?
     
     @IBOutlet weak var roverImg: UIImageView!
     @IBOutlet weak var fullName: UILabel!
@@ -21,8 +25,14 @@ class PhotosViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        evergageScreen?.trackAction("View Photos")
+        self.fullName.text = "Full Name: \(fullNameStr!)"
+        self.earthDate.text = "Earth's Name: \(earthDateStr!)"
+        self.roverName.text = "Earth's Name: \(roverNameStr!)"
+        self.landingDate.text = "Earth's Name: \(landingDateStr!)"
+        self.launchDate.text = "Earth's Name: \(launchDateStr!)"
+        
     }
     
     @IBAction func handleAction(_ sender: UIButton) {

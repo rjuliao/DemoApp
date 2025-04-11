@@ -4,6 +4,11 @@
 //
 //  Created by Raul Humberto Juliao Colina on 20/03/25.
 //
+//
+//  Test with the model configuration
+//  Do i need a time to wait?
+//  Create a disclosure in case no data comes arround? Select a couple of date just in case????
+//
 
 import UIKit
 
@@ -13,7 +18,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var earthDatePicker: UIDatePicker!
     
-    var finalDate :String?
+    var finalDate : String?
+    var roverData : RoverPhotos?
     var nasaManager = NasaManager()
     
     @IBAction func handleClick(_ sender: UIButton) {
@@ -22,7 +28,6 @@ class ViewController: UIViewController {
         evergageScreen?.trackAction("Button clicked")
         self.performSegue(withIdentifier: "goToPhotos", sender: self)
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,12 +62,14 @@ class ViewController: UIViewController {
 extension ViewController: NasaManagerDelegate{
     func didGetPhotos(_ nasaManager: NasaManager, photos: RoverPhotos) {
         // something
+        DispatchQueue.main.async {
+            self.roverData = photos
+        }
     }
     
     func didFailWithError(error: any Error) {
         print(error)
     }
-    
 }
 
 extension ViewController {
@@ -74,7 +81,13 @@ extension ViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == "goToPhotos"{
             let destination = segue.destination as! PhotosViewController
-            destination.value = "Hola Perra"
+            //pass the whole information to the other view
+            destination.img_src = roverData?.photos[0].imgSrc ?? ""
+            destination.earthDateStr = roverData?.photos[0].earthDate ?? ""
+            destination.fullNameStr = roverData?.photos[0].camera.name ?? ""
+            destination.launchDateStr = roverData?.photos[0].rover.launchDate ?? ""
+            destination.landingDateStr = roverData?.photos[0].rover.landingDate ?? ""
+            destination.roverNameStr = roverData?.photos[0].rover.name ?? ""
         }
     }
 }
