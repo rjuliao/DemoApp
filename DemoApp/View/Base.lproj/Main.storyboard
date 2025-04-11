@@ -44,6 +44,7 @@
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="handleClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VCe-wD-pZp"/>
+                                            <segue destination="F1p-3u-Uhb" kind="presentation" identifier="goToPhotos" id="TpS-TT-Lcc"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -67,25 +68,101 @@
             </objects>
             <point key="canvasLocation" x="46.564885496183201" y="-2.1126760563380285"/>
         </scene>
-        <!--View Controller-->
+        <!--Photos View Controller-->
         <scene sceneID="o3K-zc-YqJ">
             <objects>
-                <viewController id="F1p-3u-Uhb" sceneMemberID="viewController">
+                <viewController id="F1p-3u-Uhb" customClass="PhotosViewController" customModule="DemoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lds-0I-oSW">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y3B-qJ-VyO">
+                                <rect key="frame" x="10" y="70" width="373" height="428"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ycd-gg-2Bb">
+                                <rect key="frame" x="10" y="512" width="373" height="226"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rover and Camera information:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D9u-YZ-hXE">
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cuo-5o-Ob9">
+                                        <rect key="frame" x="0.0" y="40" width="373" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earth Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCR-mh-mVU">
+                                        <rect key="frame" x="0.0" y="70.333333333333371" width="373" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rover´s Name: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVJ-gu-dP4">
+                                        <rect key="frame" x="0.0" y="100.66666666666663" width="373" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Landing Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncJ-yB-ybF">
+                                        <rect key="frame" x="0.0" y="131" width="373" height="20.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Launch Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXo-lk-Kwc">
+                                        <rect key="frame" x="0.0" y="161.33333333333337" width="373" height="20.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fz9-4v-HP2">
+                                        <rect key="frame" x="0.0" y="191.66666666666663" width="373" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Back">
+                                            <color key="baseForegroundColor" red="0.36078431370000003" green="0.1843137255" blue="0.76078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="baseBackgroundColor" red="1" green="0.94117647059999998" blue="0.47058823529999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="handleAction:" destination="F1p-3u-Uhb" eventType="touchUpInside" id="7vx-xv-A7h"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="rRf-pF-Wf8"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                        <constraints>
+                            <constraint firstItem="Ycd-gg-2Bb" firstAttribute="top" secondItem="Y3B-qJ-VyO" secondAttribute="bottom" constant="14" id="42f-lT-ohS"/>
+                            <constraint firstItem="Y3B-qJ-VyO" firstAttribute="top" secondItem="Lds-0I-oSW" secondAttribute="top" constant="70" id="HCm-iM-wCe"/>
+                            <constraint firstItem="Y3B-qJ-VyO" firstAttribute="centerX" secondItem="Lds-0I-oSW" secondAttribute="centerX" id="KWM-kQ-flT"/>
+                            <constraint firstItem="rRf-pF-Wf8" firstAttribute="trailing" secondItem="Ycd-gg-2Bb" secondAttribute="trailing" constant="10" id="KsD-FL-9Jg"/>
+                            <constraint firstAttribute="bottom" secondItem="Ycd-gg-2Bb" secondAttribute="bottom" constant="45" id="ZNE-Kw-uGH"/>
+                            <constraint firstItem="Y3B-qJ-VyO" firstAttribute="leading" secondItem="rRf-pF-Wf8" secondAttribute="leading" constant="10" id="kv1-KW-E3t"/>
+                            <constraint firstItem="Ycd-gg-2Bb" firstAttribute="leading" secondItem="rRf-pF-Wf8" secondAttribute="leading" constant="10" id="qTN-o5-X4r"/>
+                            <constraint firstItem="rRf-pF-Wf8" firstAttribute="trailing" secondItem="Y3B-qJ-VyO" secondAttribute="trailing" constant="10" id="xhz-fr-Zyh"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="2Zu-fw-Fzr"/>
+                    <connections>
+                        <outlet property="earthDate" destination="YCR-mh-mVU" id="o9c-7a-KRv"/>
+                        <outlet property="fullName" destination="cuo-5o-Ob9" id="Q8G-pA-5Ty"/>
+                        <outlet property="landingDate" destination="ncJ-yB-ybF" id="2DT-B0-mHg"/>
+                        <outlet property="launchDate" destination="wXo-lk-Kwc" id="unp-gh-OfO"/>
+                        <outlet property="roverImg" destination="Y3B-qJ-VyO" id="kUW-Pt-sgY"/>
+                        <outlet property="roverName" destination="hVJ-gu-dP4" id="v0T-Z6-iBX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fKz-Td-NeW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1155" y="-2"/>
+            <point key="canvasLocation" x="1154.9618320610687" y="-2.1126760563380285"/>
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
