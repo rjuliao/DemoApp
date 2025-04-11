@@ -37,10 +37,11 @@ struct NasaManager {
                 if let safeData = data {
                     if let photos = self.parseJSON(safeData) {
                         self.delegate?.didGetPhotos(self, photos: photos)
-                        print(photos)
+                        //print(photos)
                     }
                 }
             }
+            task.resume()
         }
     }
     
@@ -48,8 +49,14 @@ struct NasaManager {
         let decoder = JSONDecoder()
         do{
             let decodedData = try decoder.decode(RoverPhotos.self, from: roversData)
-            print(decodedData.photos[0].camera.name)
-            return decodedData
+            if decodedData.photos.count != 0 {
+                print(decodedData.photos[0].camera.name)
+                return decodedData
+            }
+            else {
+                print("No data found")
+                return nil
+            }
         }catch {
             delegate?.didFailWithError(error: error)
             return nil
