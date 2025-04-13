@@ -8,8 +8,6 @@
 import UIKit
 
 class PhotosViewController: UIViewController {
-
-    let sideUrl : String = "https://www.vecteezy.com/vector-art/6692205-vector-loading-icon-template-black-color-editable-vector-loading-icon-symbol-flat-vector-illustration-for-graphic-and-web-design"
     
     @IBOutlet weak var roverImg: UIImageView!
     @IBOutlet weak var fullName: UILabel!
@@ -28,21 +26,18 @@ class PhotosViewController: UIViewController {
         print(finalDate!)
         nasaManager.fetchPhotos(date: finalDate!)
         evergageScreen?.trackAction("View Photos")
-        //self.fullName.text =
-        //self.earthDate.text = "Earth Date: \(earthDateStr!)"
-        //self.roverName.text = "Rovers's Name: \(roverNameStr!)"
-        //self.landingDate.text = "Landing Date: \(landingDateStr!)"
-        //self.launchDate.text = "Launch Date: \(launchDateStr!)"
-        //let url = URL(string: img_src ?? sideUrl )!
-        //downloadImage(from: url)
     }
     
     @IBAction func handleAction(_ sender: UIButton) {
-        
         //go back
         self.dismiss(animated: true, completion: nil)
     }
-    
+
+}
+
+ //MARK: - download actions for image
+
+extension PhotosViewController {
     func downloadImage(from url: URL) {
         print("Download Started")
         getData(from: url) { data, response, error in
@@ -59,7 +54,6 @@ class PhotosViewController: UIViewController {
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
-
 }
 
 
