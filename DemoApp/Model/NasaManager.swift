@@ -8,7 +8,7 @@
 import Foundation
 
 protocol NasaManagerDelegate{
-    func didGetPhotos(_ nasaManager: NasaManager, photos: RoverPhotos)
+    func didGetPhotos(_ nasaManager: NasaManager, photos: NasaModel)
     func didFailWithError(error: Error)
 }
 
@@ -45,13 +45,23 @@ struct NasaManager {
         }
     }
     
-    func parseJSON(_ roversData: Data) -> RoverPhotos? {
+    func parseJSON(_ roversData: Data) -> NasaModel? {
         let decoder = JSONDecoder()
         do{
             let decodedData = try decoder.decode(RoverPhotos.self, from: roversData)
             if decodedData.photos.count != 0 {
                 print(decodedData.photos[0].camera.name)
-                return decodedData
+                let id = decodedData.photos[0].id
+                let rName = decodedData.photos[0].rover.name
+                let imgUrl = decodedData.photos[0].imgSrc
+                let name = decodedData.photos[0].camera.fullName
+                let earthDate = decodedData.photos[0].earthDate
+                let lanDate = decodedData.photos[0].rover.landingDate
+                let launDate = decodedData.photos[0].rover.launchDate
+                
+                let nasa = NasaModel(id: id, roverName: rName, earthDate: earthDate, imgURL: imgUrl, fullName: name, landingDate: lanDate, launchDate: launDate)
+                
+                return nasa
             }
             else {
                 print("No data found")
