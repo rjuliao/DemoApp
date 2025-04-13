@@ -13,18 +13,17 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var labelText: UILabel!
     
     @IBOutlet weak var earthDatePicker: UIDatePicker!
     
     var finalDate : String?
-    var roverData : RoverPhotos?
     var nasaManager = NasaManager()
     
     @IBAction func handleClick(_ sender: UIButton) {
         print(finalDate!)
-        nasaManager.fetchPhotos(date: finalDate!)
+        
         evergageScreen?.trackAction("Button clicked")
         self.performSegue(withIdentifier: "goToPhotos", sender: self)
     }
@@ -32,14 +31,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        nasaManager.delegate = self
         trackScreen()
         earthDatePicker.locale = .current
         earthDatePicker.date = Date()
         earthDatePicker.maximumDate = Date()
         earthDatePicker.addTarget(self, action: #selector(dateSelected), for: .valueChanged)
     }
-
+    
     @objc func dateSelected(){
         print(earthDatePicker.date)
         let dateSelected = earthDatePicker.date
@@ -56,21 +54,10 @@ class ViewController: UIViewController {
         evergageScreen?.trackAction("Main Screen")
         
     }
-
-}
-
-extension ViewController: NasaManagerDelegate{
-    func didGetPhotos(_ nasaManager: NasaManager, photos: RoverPhotos) {
-        // something
-        DispatchQueue.main.async {
-            self.roverData = photos
-        }
-    }
     
-    func didFailWithError(error: any Error) {
-        print(error)
-    }
 }
+
+ //MARK: - prepare for next screen data
 
 extension ViewController {
     // MARK: - Navigation
@@ -82,12 +69,7 @@ extension ViewController {
         if segue.identifier == "goToPhotos"{
             let destination = segue.destination as! PhotosViewController
             //pass the whole information to the other view
-            destination.img_src = roverData?.photos[0].imgSrc ?? ""
-            destination.earthDateStr = roverData?.photos[0].earthDate ?? ""
-            destination.fullNameStr = roverData?.photos[0].camera.name ?? ""
-            destination.launchDateStr = roverData?.photos[0].rover.launchDate ?? ""
-            destination.landingDateStr = roverData?.photos[0].rover.landingDate ?? ""
-            destination.roverNameStr = roverData?.photos[0].rover.name ?? ""
+            destination.finalDate = finalDate!
         }
     }
 }
