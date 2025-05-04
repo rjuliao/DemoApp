@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Evergage
 
 class PhotosViewController: UIViewController {
     
@@ -25,7 +26,7 @@ class PhotosViewController: UIViewController {
         nasaManager.delegate = self
         print(finalDate!)
         nasaManager.fetchPhotos(date: finalDate!)
-        evergageScreen?.trackAction("View Photos")
+        //evergageScreen?.trackAction("View Photos")
     }
     
     @IBAction func handleAction(_ sender: UIButton) {
@@ -69,6 +70,7 @@ extension PhotosViewController: NasaManagerDelegate{
            self.landingDate.text = "Landing Date: \(photos.landingDateS)"
            self.launchDate.text = "Launching Date: \(photos.launchDateS)"
            let url = URL(string: photos.urlString)
+           self.refreshView(id: photos.id, name: photos.fullNameS, imageUrl: photos.urlString, roverName: photos.roversNameS)
            self.downloadImage(from: url!)
        }
    }
@@ -76,4 +78,15 @@ extension PhotosViewController: NasaManagerDelegate{
    func didFailWithError(error: any Error) {
        print(error)
    }
+    
+    private func refreshView(id: Int, name: String, imageUrl: String, roverName: String){
+        evergageScreen?.viewItem(
+            EVGProduct.init(id:String(id),
+                            name: name,
+                            price: 100,
+                            url: "url",
+                            imageUrl: imageUrl,
+                            evgDescription: "This is a photo form \(roverName)")
+        )
+    }
 }
