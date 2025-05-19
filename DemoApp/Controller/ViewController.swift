@@ -39,7 +39,6 @@ class ViewController: UIViewController {
     }
     
     @objc func dateSelected(){
-        print(earthDatePicker.date)
         let dateSelected = earthDatePicker.date
         
         let dateFormatter = DateFormatter()
