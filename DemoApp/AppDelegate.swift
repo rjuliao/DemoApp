@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Start the Evergage Configuration with our Dataset information
         evergage.start { (clientConfigurationBuilder)   in
             clientConfigurationBuilder.account = "sundoginteractive"
-            clientConfigurationBuilder.dataset = "prft_demo2022"
+            clientConfigurationBuilder.dataset = "rj_prft_demo"
             // if we want to user push notification campaings
             clientConfigurationBuilder.usePushNotifications = true
             //Allow user-initiated gesture to connect to the Personalization web console for action mapping screens.
