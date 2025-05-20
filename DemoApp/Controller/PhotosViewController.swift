@@ -40,11 +40,11 @@ class PhotosViewController: UIViewController {
 
 extension PhotosViewController {
     func downloadImage(from url: URL) {
-        print("Download Started")
+        //print("Download Started")
         getData(from: url) { data, response, error in
             guard let data = data, error == nil else { return }
-            print(response?.suggestedFilename ?? url.lastPathComponent)
-            print("Download Finished")
+            //print(response?.suggestedFilename ?? url.lastPathComponent)
+            //print("Download Finished")
             // always update the UI from the main thread
             DispatchQueue.main.async() { [weak self] in
                 self?.roverImg.image = UIImage(data: data)
@@ -70,7 +70,7 @@ extension PhotosViewController: NasaManagerDelegate{
            self.landingDate.text = "Landing Date: \(photos.landingDateS)"
            self.launchDate.text = "Launching Date: \(photos.launchDateS)"
            let url = URL(string: photos.urlString)
-           self.refreshView(id: photos.id, name: photos.fullNameS, imageUrl: photos.urlString, roverName: photos.roversNameS)
+           self.refreshView(id: photos.id, name: photos.fullNameS, imageUrl: photos.urlString, roverName: photos.roversNameS, earthDate: photos.earthDateS, landingDate: photos.landingDateS, launchDate: photos.launchDateS)
            self.downloadImage(from: url!)
        }
    }
@@ -79,14 +79,45 @@ extension PhotosViewController: NasaManagerDelegate{
        print(error)
    }
     
-    private func refreshView(id: Int, name: String, imageUrl: String, roverName: String){
+    private func refreshView(id: Int, name: String, imageUrl: String, roverName: String, earthDate: String, landingDate: String, launchDate: String){
+        print("Refresh View Method")
+        let productDict : [String : Any] = [
+            //"type": "p",
+            "_id": String(id),
+            "url": "https://api.nasa.gov/",
+            "name": name,
+            "imageUrl": imageUrl,
+            "description": "This is a photo taken from \(roverName)",
+            "earthDate": earthDate,
+            //"landingDate": landingDate,
+            //"launchDate": launchDate
+            
+        ]
+        //let valid = JSONSerialization.isValidJSONObject(productData)
+        
+        //evergageScreen?.viewItemDetail(
+        //    EVGProduct.init(id:String(id), name: name, price: 100,url: "url", imageUrl: imageUrl, evgDescription: "This is a photo form \(roverName)")
+        //)
+        
+        
+        
+        //let item : EVGItem? = EVGItem.fromJSONDictionary(productDict)
+        //evergageScreen?.viewItemDetail(item, actionName: "testing this shit")
+        
+    
+        
+        //Not sure how this work...
         evergageScreen?.viewItem(
-            EVGProduct.init(id:String(id),
-                            name: name,
-                            price: 100,
-                            url: "url",
-                            imageUrl: imageUrl,
-                            evgDescription: "This is a photo form \(roverName)")
+            EVGProduct.init(fromJSONDictionary: productDict)
         )
+        
+    }
+    
+    private func cartActions(id: Int, name: String, imageUrl: String, roverName: String, earthDate: String, landingDate: String, launchDate: String){
+        evergageScreen?.add(toCart: .init(productId: String(id), productName: name, price: 100, quantity: 1))
+        
+        let lineItems : [EVGLineItem] = [EVGLineItem.init(productId: String(id), productName: name, price: 100, quantity: 1)]
+        
+        //evergageScreen?.purchase(EVGOrder(id: "1111", lineItems: lineItems, totalValue: 19000))
     }
 }
