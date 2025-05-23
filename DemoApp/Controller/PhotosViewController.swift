@@ -24,7 +24,7 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         nasaManager.delegate = self
-        print(finalDate!)
+        //print(finalDate!)
         nasaManager.fetchPhotos(date: finalDate!)
         //evergageScreen?.trackAction("View Photos")
     }
@@ -81,35 +81,33 @@ extension PhotosViewController: NasaManagerDelegate{
     
     private func refreshView(id: Int, name: String, imageUrl: String, roverName: String, earthDate: String, landingDate: String, launchDate: String){
         print("Refresh View Method")
+        let url :String = "https://api.nasa.gov/"
+        
+        
+        let item : EVGItem = EVGProduct.init(id:String(id),
+                                             name: name,
+                                             price: 10,
+                                             url: url,
+                                             imageUrl: imageUrl,
+                                             evgDescription: "This is a photo taken form \(roverName). Earth Date: \(earthDate). Landing Date: \(landingDate). Launch Date: \(launchDate)")
+        
+        //evergageScreen?.viewItemDetail(item)
+        
         let productDict : [String : Any] = [
-            //"type": "p",
             "_id": String(id),
-            "url": "https://api.nasa.gov/",
+            "url": url,
             "name": name,
             "imageUrl": imageUrl,
-            "description": "This is a photo taken from \(roverName)",
-            "earthDate": earthDate,
-            //"landingDate": landingDate,
-            //"launchDate": launchDate
-            
+            "description": "This is a photo taken form \(roverName). Earth Date: \(earthDate). Landing Date: \(landingDate). Launch Date: \(launchDate)",
+            "price": 10,
+            "currency": "USD",
+            "inventoryCount": 2
         ]
         //let valid = JSONSerialization.isValidJSONObject(productData)
         
-        //evergageScreen?.viewItemDetail(
-        //    EVGProduct.init(id:String(id), name: name, price: 100,url: "url", imageUrl: imageUrl, evgDescription: "This is a photo form \(roverName)")
-        //)
-        
-        
-        
-        //let item : EVGItem? = EVGItem.fromJSONDictionary(productDict)
-        //evergageScreen?.viewItemDetail(item, actionName: "testing this shit")
-        
-    
-        
         //Not sure how this work...
-        evergageScreen?.viewItem(
-            EVGProduct.init(fromJSONDictionary: productDict)
-        )
+        let itemJson: EVGItem? = EVGProduct.init(fromJSONDictionary: productDict)
+        evergageScreen?.viewItemDetail(itemJson, actionName: "User did specific action")
         
     }
     
@@ -118,6 +116,6 @@ extension PhotosViewController: NasaManagerDelegate{
         
         let lineItems : [EVGLineItem] = [EVGLineItem.init(productId: String(id), productName: name, price: 100, quantity: 1)]
         
-        //evergageScreen?.purchase(EVGOrder(id: "1111", lineItems: lineItems, totalValue: 19000))
+        evergageScreen?.purchase(EVGOrder(id: "1111", lineItems: lineItems, totalValue: 19000))
     }
 }
