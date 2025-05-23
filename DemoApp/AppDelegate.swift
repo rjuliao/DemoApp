@@ -17,8 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let evergage = Evergage.sharedInstance()
         
-        //Set User ID as anonymous
+        //Set User ID as anonymous and attributes
         evergage.userId = evergage.anonymousId
+        evergage.setUserAttribute("Raul", forName: "firstName")
+        evergage.setUserAttribute("Juliao", forName: "lastName")
+        evergage.setUserAttribute("raul@gmail.com", forName: "emailAddress")
+        evergage.setUserAttribute("123456", forName: "zipCode")
         
         //Start the Evergage Configuration with our Dataset information
         evergage.start { (clientConfigurationBuilder)   in
